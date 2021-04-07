@@ -6,6 +6,8 @@ spring:
     console:
       enabled: true # H2 웹 콘솔을 사용하겠다는 의미
       path: /test_db # 콘솔의 경로
+      settings:
+        web-allow-others: true
 
   datasource:
     driver-class-name: org.h2.Driver #h2 드라이버 설정
@@ -17,8 +19,3 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     properties.hibernate.hbm2ddl.auto: update
     showSql: true
-  messages:
-    basename: i18n/exception
-    encoding: UTF-8
-    jwt:
-      secret: govlepel@$&

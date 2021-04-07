@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 @RequiredArgsConstructor
-@RequestMapping("/")
 @RestController
 public class ServiceController {
 
