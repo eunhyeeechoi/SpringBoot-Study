@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Getter // user 필드값의 getter 를 생성
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 인자없는 생성자를 자동으로 생성
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동생성
-@Table(name = "user4")
+@Table(name = "user5")
 public class User implements UserDetails {
     @Id // primarykey
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,31 +40,26 @@ public class User implements UserDetails {
                 .collect(Collectors.toList());
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public String getUsername() {
         return this.uid;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isEnabled() {
         return true;

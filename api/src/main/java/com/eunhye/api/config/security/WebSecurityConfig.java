@@ -31,17 +31,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().disable()
-                .csrf().disable() //csrf 보안 토큰 disabled
+        http
+                .httpBasic().disable()
+                .csrf().disable()//csrf 보안 토큰 disabled
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 Session 사용 X
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().permitAll()// 나머지 요청은 누구나 접근 가능
+                .antMatchers("/h2-console/**")
+                .permitAll()// 나머지 요청은 누구나 접근 가능
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .headers().frameOptions().sameOrigin(); // 콘솔에서 h2 db 접근 가능하도록 configure 의존성 문제
         // JwtAuthenticationFilter 를 UsernamePassworkdAuthenticationFilter 에 넣는다.
     }
 }
