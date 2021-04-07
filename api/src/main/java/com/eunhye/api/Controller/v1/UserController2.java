@@ -1,22 +1,21 @@
 package com.eunhye.api.Controller.v1;
 
-import com.eunhye.api.entity.User;
-import com.eunhye.api.repo.UserJpaRepo;
+import com.eunhye.api.domain.user.User;
+import com.eunhye.api.domain.user.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ua_parser.Parser;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController // 결과값을 JSon 으로 출력
 @RequestMapping
-public class UserController {
-    private final UserJpaRepo userJpaRepo;
+public class UserController2 {
+    private final UserRepository userJpaRepo;
 
     @GetMapping(value = "/user")
     public List<User> findAllUser() {
@@ -25,7 +24,7 @@ public class UserController {
 
     @PostMapping(value = "/user")
     public User save() {
-        User user = User.builder().uid("eun@naver.com").name("은").build();
+        User user = User.builder().uid("eun@naver.com").password("은").build();
         return userJpaRepo.save(user);
     }
 
