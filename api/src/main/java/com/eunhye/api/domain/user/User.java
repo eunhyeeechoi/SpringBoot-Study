@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동생성
 @Table(name = "user5")
 public class User implements UserDetails {
-    @Id // primarykey
+    @Id // primarykey  pk 생성전략을 DB에 위임
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // pk 생성전략을 DB에 위임
     private long msrl;
+
     @Column(nullable = false, unique = true, length = 30)
     private String uid;
 

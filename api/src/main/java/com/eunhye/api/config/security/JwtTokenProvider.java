@@ -67,4 +67,15 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
+    // 토큰 만료일자 리턴
+    public String getExpiraate(String token){
+        try{
+            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return String.valueOf(claims.getBody().getExpiration());
+
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

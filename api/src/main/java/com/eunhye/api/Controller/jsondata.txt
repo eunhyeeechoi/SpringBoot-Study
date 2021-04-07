@@ -1,3 +1,28 @@
+{
+    "uid": "user",
+    "password": "1234"
+}
+{
+    "uid": "aba",
+    "password": "1234"
+}
+
+{
+    "oTime":"오전",
+    "pTime": "2021-04-07 7:40",
+    "bMeasure": "80",
+    "memo":"아침"
+}
+
+{
+    "oTime":"오전",
+    "pTime": "2021-04-07 17:40",
+    "bMeasure": "80",
+    "memo":"메모"
+}
+//////////////
+mi_pk, blood_measurement, measure_memo, msrl, oop_time, pause_time)
+
 plugins {
     id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -25,6 +50,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2:1.4.197'
     runtimeOnly 'com.h2database:h2:1.3.161'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
