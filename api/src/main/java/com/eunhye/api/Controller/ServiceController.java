@@ -23,8 +23,8 @@ import java.util.Enumeration;
 @RestController
 public class ServiceController {
 
-    // true false 로 체크할까
-    @RequestMapping(value = "/user-agent",produces = MediaType.APPLICATION_JSON_VALUE)
+    // true false 로 체크
+    @RequestMapping(value = "/user-agent", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean Userinfo(@RequestHeader(value = "User-Agent") String userAgent, HttpServletResponse response) {
         UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
         if (userAgent.length() > 0) {
