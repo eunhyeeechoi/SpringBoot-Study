@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @Table(name = "user")
 public class User implements UserDetails {
     @Id // primarykey  pk 생성전략을 DB에 위임
-    //@ManyToOne(cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long msrl;
 
