@@ -35,18 +35,21 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> user, HttpServletResponse response) {
-        User member = userRepository.findByUid(user.get("uid"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 id 입니다."));
+    public boolean login(@RequestBody Map<String, String> user, HttpServletResponse response) {
+        User member = userRepository.findByUid(user.get("uid")).orElseThrow(()
+                -> new IllegalArgumentException("가입되지 않은 id 입니다."));
+
+
         String token = "";
         String date = "";
         // 비밀번호 틀리고 이런것들에 대한 예외처리가 아직 부족함 .. ㅠㅠ
         if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
-            System.out.println("타긴하니?");
-            response.setStatus(400);
-            throw new IllegalArgumentException("잘못된 번호 입니다.");
-            //response.sendError(100,"잘못된 비밀번호 입니다.");
-        } else {
+            System.out.println("잘못된 비밀번호");
+            response.setHeader("message :", "비밀번호가 틀렸습니다.");
+            response.setStatus(402);
+            return false;
+        }
+        else {
             token = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
             date = jwtTokenProvider.getExpiraate(token);
             //response.addHeader("만료일자", date);
@@ -54,38 +57,8 @@ public class UserController {
             response.setHeader("expDate", date);
             response.setStatus(200);
         }
-        return "로그인 성공";
+        return true;
     }
-
-    /*
-        @PostMapping("/measure")
-        public String Measure(HttpServletRequest request, @RequestParam("oTime") String oTime, @RequestParam("pTime") String pTime, @RequestParam("bMeasure") String bMeasure, @RequestParam("memo") String memo, HttpServletResponse response) {
-            String token = request.getHeader("Token");
-            System.out.println(">>>>>>> 토큰 " + token);
-            Long userpk = Long.valueOf(jwtTokenProvider.getUserPk(token));
-
-            measureRepository.save(Measure.builder()
-                    .oopTime(oTime)
-                    .pauseTime(pTime)
-                    .bloodMeasurement(Integer.parseInt(bMeasure))
-                    .measureMemo(memo)
-                    .msrl(userpk)
-                    .build()).getMiPk();
-
-            return "뭐야";
-        }
-
-     */
-    /*
-    @PostMapping("/mea")
-    public String Mea(HttpServletRequest request, HttpServletResponse response) {
-        String token = request.getHeader("Token");
-        System.out.println(">>>>>>> 토큰 " + token);
-        String userpk = jwtTokenProvider.getUserPk(token);
-        System.out.println(">>>>>>>>>>>pk " + userpk);
-        return "안녕";
-    }
-     */
 
     @PostMapping("/measure")
     public boolean Measure(HttpServletRequest request, @RequestBody Map<String, String> Data, HttpServletResponse response) {
@@ -105,7 +78,7 @@ public class UserController {
             measureRepository.save(Measure.builder()
                     .bloodMeasurement(Integer.parseInt(bMeasure))
                     .measureMemo(memo)
-                    .msrl(String.valueOf(userid))
+                    .msrl(userid)
                     .oopTime(oTime)
                     .pauseTime(pTime)
                     .build()).getMiPk();
