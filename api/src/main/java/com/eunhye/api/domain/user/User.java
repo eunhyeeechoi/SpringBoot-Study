@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 인자없는 생성자를 자동으로 생성
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동생성
 
-@Table(name = "user")
+@Table(name = "userdata")
 public class User implements UserDetails {
     @Id // primarykey  pk 생성전략을 DB에 위임
     @GeneratedValue(strategy = GenerationType.IDENTITY)

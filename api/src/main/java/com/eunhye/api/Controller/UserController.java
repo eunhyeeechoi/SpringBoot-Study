@@ -62,7 +62,7 @@ public class UserController {
         return "로그인 실패";
     }
 
-
+    // 혈당 측정 값 저장
     @PostMapping("/measure")
     public String Measure(HttpServletRequest request, @RequestBody Map<String, String> Data, HttpServletResponse response) {
         String token = request.getHeader("Token");
