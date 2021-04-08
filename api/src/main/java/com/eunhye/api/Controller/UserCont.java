@@ -23,7 +23,7 @@ public class UserCont {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
     private final MeasureRepository measureRepository;
-    private final osCheck service;
+    private final OsCheck service;
 
     // 이전버전 로그인
     @PostMapping("/login2")
@@ -45,7 +45,7 @@ public class UserCont {
                 return false;
             } else {
                 token = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
-                date = jwtTokenProvider.getExpiraate(token);
+                date = jwtTokenProvider.getExpirdate(token);
                 response.setHeader("Token", token);
                 response.setHeader("expDate", date);
                 response.setStatus(200);

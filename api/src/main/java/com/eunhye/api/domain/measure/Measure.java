@@ -27,6 +27,6 @@ public class Measure {
     @Column(nullable = true, length = 200)
     private String measureMemo; // 메모
 
-    @Column(nullable = false,length = 100)
+    @Column(nullable = false, length = 100)
     private String msrl; // 사용자 name 참조값
 }
