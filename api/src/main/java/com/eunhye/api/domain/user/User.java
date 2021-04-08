@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 @Getter // user 필드값의 getter 를 생성
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 인자없는 생성자를 자동으로 생성
 @AllArgsConstructor // 인자를 모두 갖춘 생성자를 자동생성
-@Table(name = "user5")
+
+@Table(name = "user")
 public class User implements UserDetails {
     @Id // primarykey  pk 생성전략을 DB에 위임
+    //@ManyToOne(cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long msrl;
 
