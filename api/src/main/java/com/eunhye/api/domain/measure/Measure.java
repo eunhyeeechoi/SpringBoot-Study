@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name = "measure1")
+@Table(name = "measure")
 public class Measure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

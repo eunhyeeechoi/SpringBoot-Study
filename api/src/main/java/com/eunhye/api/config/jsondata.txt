@@ -1,0 +1,30 @@
+사용자 id, password
+{
+    "uid": "user",
+    "password": "1234"
+}
+{
+    "uid": "abc",
+    "password": "1234"
+}
+{
+    "uid": "abc",
+    "password": "111"
+}
+// 혈당 측정 값 예시
+{
+    "oTime":"오전",
+    "pTime": "2021-04-07 7:40",
+    "bMeasure": "80",
+    "memo":"아침"
+}
+{
+    "oTime":"오전",
+    "pTime": "2021-04-07 17:40",
+    "bMeasure": "80",
+    "memo":"메모"
+}
+
+
+/// http header 값
+Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36
