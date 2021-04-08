@@ -7,6 +7,7 @@ import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +22,12 @@ import java.util.Enumeration;
 
 @RequiredArgsConstructor
 @RestController
+@Component
 public class ServiceController {
 
     // true false 로 체크
     @RequestMapping(value = "/user-agent", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean Userinfo(@RequestHeader(value = "User-Agent") String userAgent, HttpServletResponse response) {
+    public boolean Userinfo(@RequestHeader(value = "User-Agent") String userAgent) {
         UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
         if (userAgent.length() > 0) {
             if (parser.parse(userAgent).getOperatingSystem().getFamily().getName().isEmpty()) {

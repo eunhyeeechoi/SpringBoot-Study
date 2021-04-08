@@ -21,6 +21,7 @@ public class UserController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
     private final MeasureRepository measureRepository;
+    private final ServiceController service;
     // private final ResponseService responseService;
 
     // 회원가입
@@ -35,29 +36,32 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public boolean login(@RequestBody Map<String, String> user, HttpServletResponse response) {
-        User member = userRepository.findByUid(user.get("uid")).orElseThrow(()
-                -> new IllegalArgumentException("가입되지 않은 id 입니다."));
+    public boolean login(@RequestHeader(value = "User-Agent") String userAgent, @RequestBody Map<String, String> user, HttpServletResponse response) {
+        if (service.Userinfo(userAgent)) { // user 정보값이 전부 들어있을때만 로그인 가능
+            User member = userRepository.findByUid(user.get("uid")).orElseThrow(()
+                    -> new IllegalArgumentException("가입되지 않은 id 입니다."));
 
+            String token = "";
+            String date = "";
+            // 비밀번호 틀리고 이런것들에 대한 예외처리가 아직 부족함 .. ㅠㅠ
+            if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
+                System.out.println("잘못된 비밀번호");
+                response.setHeader("message", "Wrong password");
+                response.setStatus(402);
+                return false;
+            } else {
+                token = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+                date = jwtTokenProvider.getExpiraate(token);
+                response.setHeader("Token", token);
+                response.setHeader("expDate", date);
+                response.setStatus(200);
+            }
+            return true;
+        }
+        response.setStatus(300);
+        response.setHeader("message", "user info is not enough");
+        return false;
 
-        String token = "";
-        String date = "";
-        // 비밀번호 틀리고 이런것들에 대한 예외처리가 아직 부족함 .. ㅠㅠ
-        if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
-            System.out.println("잘못된 비밀번호");
-            response.setHeader("message :", "비밀번호가 틀렸습니다.");
-            response.setStatus(402);
-            return false;
-        }
-        else {
-            token = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
-            date = jwtTokenProvider.getExpiraate(token);
-            //response.addHeader("만료일자", date);
-            response.setHeader("Token", token);
-            response.setHeader("expDate", date);
-            response.setStatus(200);
-        }
-        return true;
     }
 
     @PostMapping("/measure")
