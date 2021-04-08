@@ -45,6 +45,7 @@ public class UserController {
             String date = "";
             if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
                 throw new RestException(402, "Wrong password");
+
             } else {
                 token = jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
                 date = jwtTokenProvider.getExpiraate(token);
@@ -68,8 +69,8 @@ public class UserController {
                 String bMeasure = Data.get("bMeasure");
                 String memo = Data.get("memo");
                 if (oTime.isEmpty() || pTime.isEmpty() || bMeasure.isEmpty()) {
-                    throw new RestException(100, "measure info in not enough");
-                    //return false;
+                    throw new RestException(422, "measure info in not enough");
+                    //return "측정 필수 데이터 부족";
                     //throw new RestException(100, "measure info in not enough");
                 } else {
                     // 체크 값을 저장
@@ -85,12 +86,13 @@ public class UserController {
                 }
             } else {
                 // 토큰이 만료 되었을때
-                throw new RestException(100, "token expiration");
+                System.out.println("token expiration");
+                throw new RestException(403, "token expiration");
             }
         }
         // 모바일 앱버전, 모바일 디바이스 os 종류, 모바일 os 중 하나가 비었을때
         return "데이터 저장 실패 ";
-        //throw new RestException(100, "user info is not enough");
+        //throw new RestException(220, "user info is not enough");
         //response.setStatus(300);
         //response.setHeader("message", "user info is not enough");
         //return false;
