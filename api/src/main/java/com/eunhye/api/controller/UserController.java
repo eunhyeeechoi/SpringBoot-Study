@@ -1,4 +1,4 @@
-package com.eunhye.api.Controller;
+package com.eunhye.api.controller;
 
 import com.eunhye.api.advice.RestException;
 import com.eunhye.api.config.security.JwtTokenProvider;
@@ -6,13 +6,13 @@ import com.eunhye.api.domain.measure.Measure;
 import com.eunhye.api.domain.measure.MeasureRepository;
 import com.eunhye.api.domain.user.User;
 import com.eunhye.api.domain.user.UserRepository;
+import com.eunhye.api.util.OsCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
 import java.util.Collections;
 import java.util.Map;
 
