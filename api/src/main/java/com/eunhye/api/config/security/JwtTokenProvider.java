@@ -69,12 +69,12 @@ public class JwtTokenProvider {
     }
 
     // 토큰 만료일자 리턴
-    public String getExpirdate(String token){
-        try{
+    public String getExpirdate(String token) {
+        try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return String.valueOf(claims.getBody().getExpiration());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

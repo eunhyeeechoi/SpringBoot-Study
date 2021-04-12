@@ -1,4 +1,4 @@
-package com.eunhye.api.Controller;
+package com.eunhye.api.util;
 
 import lombok.RequiredArgsConstructor;
 import net.sf.uadetector.UserAgentStringParser;
@@ -28,6 +28,7 @@ public class OsCheck {
                 System.out.println("os 종류 " + parser.parse(userAgent).getOperatingSystem().getFamily());
                 System.out.println("os versioin " + parser.parse(userAgent).getOperatingSystem().getVersionNumber());
                 System.out.println("app version" + parser.parse(userAgent).getVersionNumber());
+                // slf4j 로 변경 해야함
                 return true;
             }
         }
