@@ -2,7 +2,7 @@
 
 #### 기술 스택
   * Java 8
-  * SpringBoot
+  * SpringBoot2.2
   * JPA
   * H2Database
   * Gradle
