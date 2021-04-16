@@ -7,7 +7,9 @@
   * H2Database
   * Gradle
 
-#### 구현 구조
+#### 구현 기능
+  * 사용자 체크 메소드
+  * JWT 인증 
   * API 2종 구현
   * API 요청과 응답 포맷은 JSON
 
